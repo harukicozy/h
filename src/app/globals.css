@@ -22,10 +22,10 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Arial', 'Helvetica', sans-serif;
 }
 
-/* Blob Animations */
+/* Anime-style Blob Animations */
 @keyframes blob {
   0%, 100% {
     transform: translate(0, 0) scale(1);
@@ -38,8 +38,21 @@ body {
   }
 }
 
+@keyframes glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
+  }
+  50% {
+    filter: drop-shadow(0 0 40px rgba(255, 255, 255, 0.6));
+  }
+}
+
 .animate-blob {
   animation: blob 7s infinite;
+}
+
+.animate-glow {
+  animation: glow 3s infinite;
 }
 
 .animation-delay-2000 {
@@ -65,10 +78,10 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #7c3aed;
+  background: #ffffff;
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #6d28d9;
+  background: #cccccc;
 }

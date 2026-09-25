@@ -65,16 +65,16 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-black via-gray-950 to-black text-white overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-b from-black via-black to-black text-white overflow-hidden">
       {/* Animated Background */}
       <div className="fixed inset-0 z-0">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl animate-blob"></div>
-        <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
-        <div className="absolute bottom-0 left-1/2 w-96 h-96 bg-pink-600/20 rounded-full blur-3xl animate-blob animation-delay-4000"></div>
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-white/5 rounded-full blur-3xl animate-blob"></div>
+        <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-gray-500/5 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
+        <div className="absolute bottom-0 left-1/2 w-96 h-96 bg-white/5 rounded-full blur-3xl animate-blob animation-delay-4000"></div>
       </div>
 
       {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-black/40 backdrop-blur-xl border-b border-gray-800/30 z-50">
+      <nav className="fixed top-0 w-full bg-black/50 backdrop-blur-xl border-b border-white/10 z-50">
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
           <motion.div
             className="flex items-center gap-2"
@@ -83,24 +83,24 @@ export default function Home() {
             <img
               src="/profile.jpg"
               alt="Haruki"
-              className="w-10 h-10 rounded-xl object-cover shadow-lg shadow-purple-500/20"
+              className="w-10 h-10 rounded-xl object-cover shadow-lg shadow-white/30 border border-white/20"
             />
-            <span className="font-bold text-lg bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+            <span className="font-bold text-lg text-white">
               Haruki
             </span>
           </motion.div>
 
           <div className="hidden md:flex gap-8">
-            <motion.a href="#projects" className="text-gray-300 hover:text-purple-400 transition" whileHover={{ scale: 1.05 }}>
+            <motion.a href="#projects" className="text-gray-300 hover:text-white transition" whileHover={{ scale: 1.05 }}>
               Projects
             </motion.a>
-            <motion.a href="#servers" className="text-gray-300 hover:text-purple-400 transition" whileHover={{ scale: 1.05 }}>
+            <motion.a href="#servers" className="text-gray-300 hover:text-white transition" whileHover={{ scale: 1.05 }}>
               Servers
             </motion.a>
-            <motion.a href="#skills" className="text-gray-300 hover:text-purple-400 transition" whileHover={{ scale: 1.05 }}>
+            <motion.a href="#skills" className="text-gray-300 hover:text-white transition" whileHover={{ scale: 1.05 }}>
               Skills
             </motion.a>
-            <motion.a href="#contact" className="text-gray-300 hover:text-purple-400 transition" whileHover={{ scale: 1.05 }}>
+            <motion.a href="#contact" className="text-gray-300 hover:text-white transition" whileHover={{ scale: 1.05 }}>
               Contact
             </motion.a>
           </div>
@@ -119,7 +119,7 @@ export default function Home() {
             <img
               src="/profile.jpg"
               alt="Haruki"
-              className="w-32 h-32 rounded-2xl mx-auto shadow-lg shadow-purple-500/30 object-cover"
+              className="w-32 h-32 rounded-2xl mx-auto shadow-lg shadow-white/40 object-cover border-2 border-white/30"
             />
           </motion.div>
 
@@ -130,7 +130,7 @@ export default function Home() {
             animate="visible"
           >
             <motion.span variants={itemVariants} className="block">
-              Hello, I'm <span className="bg-gradient-to-r from-purple-400 via-blue-400 to-pink-400 bg-clip-text text-transparent">Haruki</span>
+              Hello, I'm <span className="text-white">Haruki</span>
             </motion.span>
             <motion.span variants={itemVariants} className="block text-gray-300">
               Discord & Minecraft Developer
@@ -154,7 +154,7 @@ export default function Home() {
           >
             <motion.a
               href="#projects"
-              className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-4 rounded-xl font-semibold hover:shadow-xl hover:shadow-purple-600/50 transition"
+              className="bg-white text-black px-8 py-4 rounded-xl font-semibold hover:shadow-xl hover:shadow-white/50 transition border border-white"
               variants={itemVariants}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -163,7 +163,7 @@ export default function Home() {
             </motion.a>
             <motion.a
               href="#contact"
-              className="border-2 border-purple-500 text-white px-8 py-4 rounded-xl font-semibold hover:bg-purple-500/10 transition"
+              className="border-2 border-white text-white px-8 py-4 rounded-xl font-semibold hover:bg-white/10 transition"
               variants={itemVariants}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -185,7 +185,7 @@ export default function Home() {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="relative z-10 py-20 px-6 border-t border-gray-800/30">
+      <section id="projects" className="relative z-10 py-20 px-6 border-t border-white/10">
         <div className="max-w-6xl mx-auto">
           <motion.div
             className="mb-16"
@@ -195,7 +195,7 @@ export default function Home() {
             viewport={{ once: true }}
           >
             <h2 className="text-4xl md:text-5xl font-black mb-4">Featured Projects</h2>
-            <div className="w-20 h-1 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full"></div>
+            <div className="w-20 h-1 bg-white rounded-full"></div>
           </motion.div>
 
           <motion.div
@@ -208,20 +208,20 @@ export default function Home() {
             {projects.map((project, index) => (
               <motion.div
                 key={index}
-                className="group bg-gradient-to-br from-gray-900/50 to-gray-950/50 border border-gray-800/50 rounded-2xl p-8 hover:border-purple-500/50 transition-all hover:bg-gray-900/70"
+                className="group bg-white/5 border border-white/20 rounded-2xl p-8 hover:border-white/50 transition-all hover:bg-white/10"
                 variants={itemVariants}
                 whileHover={{ scale: 1.02, y: -5 }}
               >
                 <div className="flex items-start justify-between mb-4">
                   <h3 className="text-2xl font-bold">{project.title}</h3>
-                  <span className="text-2xl text-purple-400 opacity-0 group-hover:opacity-100 transition">→</span>
+                  <span className="text-2xl text-white opacity-0 group-hover:opacity-100 transition">→</span>
                 </div>
                 <p className="text-gray-400 mb-6 leading-relaxed">{project.description}</p>
                 <div className="flex flex-wrap gap-3">
                   {project.tech.map((tech, i) => (
                     <span
                       key={i}
-                      className="px-3 py-1 bg-purple-500/20 border border-purple-500/30 rounded-lg text-sm text-purple-300"
+                      className="px-3 py-1 bg-white/20 border border-white/30 rounded-lg text-sm text-white"
                     >
                       {tech}
                     </span>
@@ -237,7 +237,7 @@ export default function Home() {
       <ServersSlider />
 
       {/* Skills Section */}
-      <section id="skills" className="relative z-10 py-20 px-6 border-t border-gray-800/30">
+      <section id="skills" className="relative z-10 py-20 px-6 border-t border-white/10">
         <div className="max-w-6xl mx-auto">
           <motion.div
             className="mb-16"
@@ -247,7 +247,7 @@ export default function Home() {
             viewport={{ once: true }}
           >
             <h2 className="text-4xl md:text-5xl font-black mb-4">My Skills</h2>
-            <div className="w-20 h-1 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full"></div>
+            <div className="w-20 h-1 bg-white rounded-full"></div>
           </motion.div>
 
           <motion.div
@@ -261,11 +261,11 @@ export default function Home() {
               <motion.div key={index} variants={itemVariants}>
                 <div className="flex items-center justify-between mb-3">
                   <span className="font-semibold text-lg">{skill.name}</span>
-                  <span className="text-purple-400">{skill.level}%</span>
+                  <span className="text-white">{skill.level}%</span>
                 </div>
-                <div className="w-full bg-gray-800/50 rounded-full h-2 overflow-hidden border border-gray-700/50">
+                <div className="w-full bg-white/20 rounded-full h-2 overflow-hidden border border-white/30">
                   <motion.div
-                    className="bg-gradient-to-r from-purple-500 to-blue-500 h-full rounded-full"
+                    className="bg-white h-full rounded-full"
                     initial={{ width: 0 }}
                     whileInView={{ width: `${skill.level}%` }}
                     transition={{ duration: 1, delay: index * 0.1 }}
@@ -279,7 +279,7 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="relative z-10 py-20 px-6 border-t border-gray-800/30">
+      <section id="contact" className="relative z-10 py-20 px-6 border-t border-white/10">
         <div className="max-w-4xl mx-auto">
           <motion.div
             className="text-center mb-16"
@@ -303,7 +303,7 @@ export default function Home() {
               href="https://github.com/harukicozy"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-gradient-to-br from-gray-900/50 to-gray-950/50 border border-gray-800/50 rounded-2xl p-8 text-center hover:border-blue-500/50 transition-all"
+              className="bg-white/5 border border-white/20 rounded-2xl p-8 text-center hover:border-white/50 transition-all"
               variants={itemVariants}
               whileHover={{ scale: 1.05, y: -5 }}
             >
@@ -316,7 +316,7 @@ export default function Home() {
               href="https://discord.com/users/haruki.cozy"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-gradient-to-br from-gray-900/50 to-gray-950/50 border border-gray-800/50 rounded-2xl p-8 text-center hover:border-blue-500/50 transition-all"
+              className="bg-white/5 border border-white/20 rounded-2xl p-8 text-center hover:border-white/50 transition-all"
               variants={itemVariants}
               whileHover={{ scale: 1.05, y: -5 }}
             >
@@ -327,7 +327,7 @@ export default function Home() {
 
             <motion.a
               href="mailto:riverswave1@gmail.com"
-              className="bg-gradient-to-br from-gray-900/50 to-gray-950/50 border border-gray-800/50 rounded-2xl p-8 text-center hover:border-blue-500/50 transition-all"
+              className="bg-white/5 border border-white/20 rounded-2xl p-8 text-center hover:border-white/50 transition-all"
               variants={itemVariants}
               whileHover={{ scale: 1.05, y: -5 }}
             >
@@ -340,7 +340,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="relative z-10 border-t border-gray-800/30 py-8 px-6">
+      <footer className="relative z-10 border-t border-white/10 py-8 px-6">
         <div className="max-w-6xl mx-auto text-center">
           <p className="text-gray-500 text-sm">
             Built with Next.js and Tailwind CSS. Hosted on Vercel.
