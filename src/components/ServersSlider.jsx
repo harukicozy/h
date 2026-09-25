@@ -16,10 +16,11 @@ export default function ServersSlider() {
 
   const slideVariants = {
     animate: {
-      x: [-1200, -4200],
+      x: [0, -3136],
       transition: {
-        duration: 25,
+        duration: 30,
         repeat: Infinity,
+        repeatType: 'loop',
         ease: 'linear',
       },
     },
@@ -49,7 +50,7 @@ export default function ServersSlider() {
           <motion.div
             className="flex gap-8"
             variants={slideVariants}
-            initial={{ x: -1200 }}
+            initial={{ x: 0 }}
             animate="animate"
           >
             {doubledServers.map((server, index) => (
