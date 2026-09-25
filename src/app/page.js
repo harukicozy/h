@@ -5,8 +5,41 @@ import { motion } from 'framer-motion';
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [loginMessage, setLoginMessage] = useState('');
 
-  const discordLoginUrl = `https://discord.com/oauth2/authorize?client_id=${process.env.NEXT_PUBLIC_DISCORD_CLIENT_ID}&response_type=code&redirect_uri=${encodeURIComponent(process.env.NEXT_PUBLIC_DISCORD_REDIRECT_URI)}&scope=identify%20email%20guilds`;
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setLoginMessage('');
+
+    try {
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setLoginMessage('Login successful! Redirecting...');
+        setTimeout(() => {
+          window.location.href = '/dashboard';
+        }, 1500);
+      } else {
+        setLoginMessage(data.error || 'Login failed');
+      }
+    } catch (error) {
+      setLoginMessage('An error occurred. Please try again.');
+      console.error('Login error:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -70,14 +103,14 @@ export default function Home() {
             >
               Why Haruki
             </motion.a>
-            <motion.a
-              href={discordLoginUrl}
+            <motion.button
+              onClick={() => setShowLoginModal(true)}
               className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-2 rounded-xl font-semibold hover:shadow-lg hover:shadow-purple-600/50 transition flex items-center gap-2"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <span>🎮</span> Discord Login
-            </motion.a>
+              <span>📧</span> Email Login
+            </motion.button>
           </nav>
 
           <motion.button
@@ -105,12 +138,12 @@ export default function Home() {
             <a href="#why" className="block text-gray-300 hover:text-purple-400">
               Why Haruki
             </a>
-            <a
-              href={discordLoginUrl}
-              className="block bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-2 rounded-xl font-semibold text-center"
+            <button
+              onClick={() => setShowLoginModal(true)}
+              className="block w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-2 rounded-xl font-semibold text-center"
             >
-              Discord Login
-            </a>
+              Email Login
+            </button>
           </div>
         </motion.div>
       </header>
@@ -170,15 +203,15 @@ export default function Home() {
             >
               View services <span>→</span>
             </motion.button>
-            <motion.a
-              href={discordLoginUrl}
+            <motion.button
+              onClick={() => setShowLoginModal(true)}
               className="border-2 border-purple-500 text-white px-8 py-4 rounded-xl font-semibold hover:bg-purple-500/10 hover:shadow-lg hover:shadow-purple-600/30 transition flex items-center justify-center gap-2"
               variants={itemVariants}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <span>🎮</span> Sign in with Discord
-            </motion.a>
+              <span>📧</span> Sign in with Email
+            </motion.button>
           </motion.div>
 
           {/* Features Row */}
@@ -241,7 +274,7 @@ export default function Home() {
                 <div className="text-sm text-blue-400 mb-3 font-semibold">01 / PRIVATE</div>
                 <h4 className="text-2xl font-bold mb-3">A safe project area</h4>
                 <p className="text-gray-400">
-                  Sign in with Discord to view your messages, files, updates, and orders in one private place.
+                  Sign in with your email to view your messages, files, updates, and orders in one private place.
                 </p>
                 <div className="mt-4 text-4xl">🔒</div>
               </motion.div>
@@ -412,6 +445,77 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      {/* Email Login Modal */}
+      {showLoginModal && (
+        <motion.div
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          onClick={() => setShowLoginModal(false)}
+        >
+          <motion.div
+            className="bg-gradient-to-br from-gray-900 to-black border border-purple-800/30 rounded-2xl p-8 max-w-md w-full"
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-2xl font-bold">Sign In</h2>
+              <button
+                onClick={() => setShowLoginModal(false)}
+                className="text-gray-400 hover:text-white text-2xl"
+              >
+                ✕
+              </button>
+            </div>
+
+            <form onSubmit={handleLogin} className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium mb-2">Email</label>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="your@email.com"
+                  className="w-full bg-gray-800/50 border border-gray-700 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-purple-500"
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium mb-2">Password</label>
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="••••••••"
+                  className="w-full bg-gray-800/50 border border-gray-700 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-purple-500"
+                  required
+                />
+              </div>
+
+              {loginMessage && (
+                <div className={`text-sm p-3 rounded-lg ${loginMessage.includes('successful') ? 'bg-green-900/30 text-green-300' : 'bg-red-900/30 text-red-300'}`}>
+                  {loginMessage}
+                </div>
+              )}
+
+              <button
+                type="submit"
+                disabled={isLoading}
+                className="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold py-3 rounded-xl hover:shadow-lg hover:shadow-purple-600/50 transition disabled:opacity-50"
+              >
+                {isLoading ? 'Signing in...' : 'Sign In'}
+              </button>
+
+              <p className="text-sm text-gray-400 text-center">
+                Don't have an account? <a href="#" className="text-purple-400 hover:text-purple-300">Create one</a>
+              </p>
+            </form>
+          </motion.div>
+        </motion.div>
+      )}
     </div>
   );
 }
