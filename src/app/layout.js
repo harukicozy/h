@@ -16,10 +16,14 @@ export const metadata = {
   description: "Build custom Discord bots, integrations, and websites for your community",
   keywords: "Discord bots, integrations, web development, community tools",
   authors: [{ name: "Haruki Services" }],
+  icons: {
+    icon: "/profile.jpg",
+  },
   openGraph: {
     title: "Haruki Services",
     description: "Build custom Discord bots, integrations, and websites for your community",
     type: "website",
+    image: "/profile.jpg",
   },
 };
 

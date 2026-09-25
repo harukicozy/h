@@ -110,9 +110,11 @@ export default function Home() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
           >
-            <div className="w-24 h-24 bg-gradient-to-br from-purple-500 to-blue-500 rounded-2xl mx-auto flex items-center justify-center text-4xl font-bold shadow-lg shadow-purple-500/30">
-              H
-            </div>
+            <img
+              src="/profile.jpg"
+              alt="Haruki"
+              className="w-32 h-32 rounded-2xl mx-auto shadow-lg shadow-purple-500/30 object-cover"
+            />
           </motion.div>
 
           <motion.h1
