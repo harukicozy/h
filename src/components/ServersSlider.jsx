@@ -14,9 +14,9 @@ const doubledServers = [...servers, ...servers];
 
 const slideVariants = {
   animate: {
-    x: [0, -3136],
+    x: [0, -1600],
     transition: {
-      duration: 30,
+      duration: 20,
       repeat: Infinity,
       repeatType: 'loop',
       ease: 'linear',
