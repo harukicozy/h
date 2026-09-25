@@ -6,36 +6,43 @@ import { motion } from 'framer-motion';
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
+  const [isSignupMode, setIsSignupMode] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [loginMessage, setLoginMessage] = useState('');
+  const [authMessage, setAuthMessage] = useState('');
 
-  const handleLogin = async (e) => {
+  const handleAuth = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    setLoginMessage('');
+    setAuthMessage('');
+
+    const endpoint = isSignupMode ? '/api/auth/signup' : '/api/auth/login';
+    const payload = isSignupMode 
+      ? { email, password, username }
+      : { email, password };
 
     try {
-      const response = await fetch('/api/auth/login', {
+      const response = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify(payload),
       });
 
       const data = await response.json();
 
       if (response.ok) {
-        setLoginMessage('Login successful! Redirecting...');
+        setAuthMessage(isSignupMode ? '✅ Account created! Redirecting...' : '✅ Login successful! Redirecting...');
         setTimeout(() => {
           window.location.href = '/dashboard';
         }, 1500);
       } else {
-        setLoginMessage(data.error || 'Login failed');
+        setAuthMessage(data.error || 'Authentication failed');
       }
     } catch (error) {
-      setLoginMessage('An error occurred. Please try again.');
-      console.error('Login error:', error);
+      setAuthMessage('An error occurred. Please try again.');
+      console.error('Auth error:', error);
     } finally {
       setIsLoading(false);
     }
@@ -446,13 +453,17 @@ export default function Home() {
         </div>
       </footer>
 
-      {/* Email Login Modal */}
+      {/* Auth Modal */}
       {showLoginModal && (
         <motion.div
           className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          onClick={() => setShowLoginModal(false)}
+          onClick={() => {
+            setShowLoginModal(false);
+            setIsSignupMode(false);
+            setAuthMessage('');
+          }}
         >
           <motion.div
             className="bg-gradient-to-br from-gray-900 to-black border border-purple-800/30 rounded-2xl p-8 max-w-md w-full"
@@ -461,16 +472,33 @@ export default function Home() {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex justify-between items-center mb-6">
-              <h2 className="text-2xl font-bold">Sign In</h2>
+              <h2 className="text-2xl font-bold">{isSignupMode ? 'Create Account' : 'Sign In'}</h2>
               <button
-                onClick={() => setShowLoginModal(false)}
+                onClick={() => {
+                  setShowLoginModal(false);
+                  setIsSignupMode(false);
+                  setAuthMessage('');
+                }}
                 className="text-gray-400 hover:text-white text-2xl"
               >
                 ✕
               </button>
             </div>
 
-            <form onSubmit={handleLogin} className="space-y-4">
+            <form onSubmit={handleAuth} className="space-y-4">
+              {isSignupMode && (
+                <div>
+                  <label className="block text-sm font-medium mb-2">Username</label>
+                  <input
+                    type="text"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    placeholder="your_username"
+                    className="w-full bg-gray-800/50 border border-gray-700 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-purple-500"
+                  />
+                </div>
+              )}
+
               <div>
                 <label className="block text-sm font-medium mb-2">Email</label>
                 <input
@@ -495,9 +523,9 @@ export default function Home() {
                 />
               </div>
 
-              {loginMessage && (
-                <div className={`text-sm p-3 rounded-lg ${loginMessage.includes('successful') ? 'bg-green-900/30 text-green-300' : 'bg-red-900/30 text-red-300'}`}>
-                  {loginMessage}
+              {authMessage && (
+                <div className={`text-sm p-3 rounded-lg ${authMessage.includes('✅') || authMessage.includes('successful') ? 'bg-green-900/30 text-green-300' : 'bg-red-900/30 text-red-300'}`}>
+                  {authMessage}
                 </div>
               )}
 
@@ -506,11 +534,15 @@ export default function Home() {
                 disabled={isLoading}
                 className="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold py-3 rounded-xl hover:shadow-lg hover:shadow-purple-600/50 transition disabled:opacity-50"
               >
-                {isLoading ? 'Signing in...' : 'Sign In'}
+                {isLoading ? (isSignupMode ? 'Creating account...' : 'Signing in...') : (isSignupMode ? 'Create Account' : 'Sign In')}
               </button>
 
               <p className="text-sm text-gray-400 text-center">
-                Don't have an account? <a href="#" className="text-purple-400 hover:text-purple-300">Create one</a>
+                {isSignupMode ? (
+                  <>Already have an account? <button type="button" onClick={() => { setIsSignupMode(false); setAuthMessage(''); }} className="text-purple-400 hover:text-purple-300">Sign In</button></>
+                ) : (
+                  <>Don't have an account? <button type="button" onClick={() => { setIsSignupMode(true); setAuthMessage(''); }} className="text-purple-400 hover:text-purple-300">Create one</button></>
+                )}
               </p>
             </form>
           </motion.div>
