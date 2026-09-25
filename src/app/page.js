@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import ServersSlider from '@/components/ServersSlider';
 
 export default function Home() {
   const projects = [
@@ -92,6 +93,9 @@ export default function Home() {
           <div className="hidden md:flex gap-8">
             <motion.a href="#projects" className="text-gray-300 hover:text-purple-400 transition" whileHover={{ scale: 1.05 }}>
               Projects
+            </motion.a>
+            <motion.a href="#servers" className="text-gray-300 hover:text-purple-400 transition" whileHover={{ scale: 1.05 }}>
+              Servers
             </motion.a>
             <motion.a href="#skills" className="text-gray-300 hover:text-purple-400 transition" whileHover={{ scale: 1.05 }}>
               Skills
@@ -228,6 +232,9 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
+
+      {/* Servers Section */}
+      <ServersSlider />
 
       {/* Skills Section */}
       <section id="skills" className="relative z-10 py-20 px-6 border-t border-gray-800/30">
