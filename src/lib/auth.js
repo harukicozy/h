@@ -1,9 +1,9 @@
 // Discord OAuth Configuration
 // Replace these with your actual Discord application credentials
 export const discordConfig = {
-  clientId: process.env.DISCORD_CLIENT_ID || "YOUR_CLIENT_ID",
+  clientId: process.env.NEXT_PUBLIC_DISCORD_CLIENT_ID || "YOUR_CLIENT_ID",
   clientSecret: process.env.DISCORD_CLIENT_SECRET || "YOUR_CLIENT_SECRET",
-  redirectUri: process.env.DISCORD_REDIRECT_URI || "http://localhost:3000/api/auth/discord/callback",
+  redirectUri: process.env.NEXT_PUBLIC_DISCORD_REDIRECT_URI || "http://localhost:3000/api/auth/discord/callback",
 };
 
 export const discordAuthUrl = `https://discord.com/oauth2/authorize?client_id=${discordConfig.clientId}&response_type=code&redirect_uri=${encodeURIComponent(discordConfig.redirectUri)}&scope=identify%20email%20guilds`;

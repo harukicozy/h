@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const discordLoginUrl = `https://discord.com/oauth2/authorize?client_id=YOUR_CLIENT_ID&response_type=code&redirect_uri=YOUR_REDIRECT_URI&scope=identify%20email%20guilds`;
+  const discordLoginUrl = `https://discord.com/oauth2/authorize?client_id=${process.env.NEXT_PUBLIC_DISCORD_CLIENT_ID}&response_type=code&redirect_uri=${encodeURIComponent(process.env.NEXT_PUBLIC_DISCORD_REDIRECT_URI)}&scope=identify%20email%20guilds`;
 
   const containerVariants = {
     hidden: { opacity: 0 },
