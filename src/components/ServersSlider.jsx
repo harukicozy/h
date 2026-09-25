@@ -16,9 +16,9 @@ export default function ServersSlider() {
 
   const slideVariants = {
     animate: {
-      x: [-100, -2000],
+      x: [-1200, -4200],
       transition: {
-        duration: 20,
+        duration: 25,
         repeat: Infinity,
         ease: 'linear',
       },
@@ -49,13 +49,13 @@ export default function ServersSlider() {
           <motion.div
             className="flex gap-8"
             variants={slideVariants}
-            initial={{ x: -100 }}
+            initial={{ x: -1200 }}
             animate="animate"
           >
             {doubledServers.map((server, index) => (
               <motion.div
                 key={index}
-                className="flex-shrink-0 min-w-max"
+                className="flex-shrink-0 w-72"
                 whileHover={{ scale: 1.05 }}
               >
                 <div className="bg-gradient-to-br from-gray-900/60 to-gray-950/60 border border-gray-800/50 rounded-2xl p-8 hover:border-purple-500/50 transition-all h-48 flex flex-col justify-center items-center text-center group cursor-pointer hover:shadow-xl hover:shadow-purple-600/20">
