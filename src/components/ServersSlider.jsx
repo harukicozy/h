@@ -2,29 +2,29 @@
 
 import { motion } from 'framer-motion';
 
-export default function ServersSlider() {
-  const servers = [
-    { name: 'Cozy Tiers', role: 'Bot Developer' },
-    { name: 'R6 Armada', role: 'Web Developer' },
-    { name: 'EclipseSMP', role: 'Bot Developer, Web Developer' },
-    { name: 'R6 Market', role: 'Owner' },
-    { name: 'R6 VORA', role: 'Bot Developer, Web Developer' },
-  ];
+const servers = [
+  { name: 'Cozy Tiers', role: 'Bot Developer' },
+  { name: 'R6 Armada', role: 'Web Developer' },
+  { name: 'EclipseSMP', role: 'Bot Developer, Web Developer' },
+  { name: 'R6 Market', role: 'Owner' },
+  { name: 'R6 VORA', role: 'Bot Developer, Web Developer' },
+];
 
-  // Double the array for seamless looping
-  const doubledServers = [...servers, ...servers];
+const doubledServers = [...servers, ...servers];
 
-  const slideVariants = {
-    animate: {
-      x: [0, -3136],
-      transition: {
-        duration: 30,
-        repeat: Infinity,
-        repeatType: 'loop',
-        ease: 'linear',
-      },
+const slideVariants = {
+  animate: {
+    x: [0, -3136],
+    transition: {
+      duration: 30,
+      repeat: Infinity,
+      repeatType: 'loop',
+      ease: 'linear',
     },
-  };
+  },
+};
+
+export default function ServersSlider() {
 
   return (
     <section id="servers" className="relative z-10 py-20 px-6 border-t border-gray-800/30 overflow-hidden">
